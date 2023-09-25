@@ -1,43 +1,19 @@
 import Card from "@/components/home/card";
 import Balancer from "react-wrap-balancer";
-import { DEPLOY_URL } from "@/lib/constants";
-import { Github, Twitter } from "@/components/shared/icons";
+import { ConnectButton } from '@rainbow-me/rainbowkit';
 import WebVitals from "@/components/home/web-vitals";
 import ComponentGrid from "@/components/home/component-grid";
 import Image from "next/image";
 import { nFormatter } from "@/lib/utils";
 
 export default async function Home() {
-  const { stargazers_count: stars } = await fetch(
-    "https://api.github.com/repos/steven-tey/precedent",
-    {
-      ...(process.env.GITHUB_OAUTH_TOKEN && {
-        headers: {
-          Authorization: `Bearer ${process.env.GITHUB_OAUTH_TOKEN}`,
-          "Content-Type": "application/json",
-        },
-      }),
-      // data will revalidate every 24 hours
-      next: { revalidate: 86400 },
-    },
-  )
-    .then((res) => res.json())
-    .catch((e) => console.log(e));
 
   return (
     <>
+      
       <div className="z-10 w-full max-w-4xl px-5 xl:px-0">
-        <a
-          href="https://twitter.com/steventey/status/1613928948915920896"
-          target="_blank"
-          rel="noreferrer"
-          className="mx-auto mb-5 flex max-w-fit animate-fade-up items-center justify-center space-x-2 overflow-hidden rounded-full bg-blue-100 px-7 py-2 transition-colors hover:bg-blue-200"
-        >
-          <Twitter className="h-5 w-5 text-[#1d9bf0]" />
-          <p className="text-sm font-semibold text-[#1d9bf0]">
-            Introducing PrecedentDAO
-          </p>
-        </a>
+  
+
         <h1
           className="animate-fade-up bg-gradient-to-br from-black to-stone-500 bg-clip-text text-center font-display text-4xl font-bold tracking-[-0.02em] text-transparent opacity-0 drop-shadow-sm md:text-7xl md:leading-[5rem]"
           style={{ animationDelay: "0.15s", animationFillMode: "forwards" }}
@@ -49,18 +25,19 @@ export default async function Home() {
           style={{ animationDelay: "0.25s", animationFillMode: "forwards" }}
         >
           <Balancer>
-            An opinionated collection of components, hooks, and utilities for
-            your Next.js project.
+          Master quantitative and qualitative data analysis with step-by-step guides and sample data .
           </Balancer>
+
         </p>
+        
         <div
           className="mx-auto mt-6 flex animate-fade-up items-center justify-center space-x-5 opacity-0"
           style={{ animationDelay: "0.3s", animationFillMode: "forwards" }}
         >
           <a
-            className="group flex max-w-fit items-center justify-center space-x-2 rounded-full border border-black bg-black px-5 py-2 text-sm text-white transition-colors hover:bg-white hover:text-black"
-            href={DEPLOY_URL}
-            target="_blank"
+            className="group flex max-w-fit items-center justify-center space-x-2 rounded-full border border-black bg-black px-5 py-2 text-md font-bold text-white transition-colors hover:bg-white hover:text-black"
+            href=""
+            // target="_blank"
             rel="noopener noreferrer"
           >
             <svg
@@ -77,19 +54,41 @@ export default async function Home() {
                 strokeLinejoin="round"
               />
             </svg>
-            <p>Deploy to Vercel</p>
+          
+            <p>Submit Datasets</p>
           </a>
+
+          
+
+
+
+
           <a
-            className="flex max-w-fit items-center justify-center space-x-2 rounded-full border border-gray-300 bg-white px-5 py-2 text-sm text-gray-600 shadow-md transition-colors hover:border-gray-800"
-            href="https://github.com/steven-tey/precedent"
+            className="flex max-w-fit items-center justify-center space-x-2 rounded-full border border-gray-300 bg-white px-5 py-2 text-md text-gray-600 shadow-md transition-colors hover:border-gray-800 font-bold"
+            href=""
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Github />
+                        <svg
+              className="h-4 w-4 group-hover:text-black"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M12 4L20 20H4L12 4Z"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+        
             <p>
-              <span className="hidden sm:inline-block">Star on</span> GitHub{" "}
-              <span className="font-semibold">{nFormatter(stars)}</span>
+              <span className="hidden sm:inline-block">Explore Datasets{" "}</span> 
+
             </p>
+           
           </a>
         </div>
       </div>
@@ -116,10 +115,20 @@ export default async function Home() {
 
 const features = [
   {
-    title: "Beautiful, reusable components",
+    title: "Beautifully and well-curated research datasets",
     description:
-      "Pre-built beautiful, a11y-first components, powered by [Tailwind CSS](https://tailwindcss.com/), [Radix UI](https://www.radix-ui.com/), and [Framer Motion](https://framer.com/motion)",
+      "Reserach Datasets of various categories, Text datasets, Audio datasets, Video datasets, powered by web3 Technologies",
     large: true,
+    demo: (
+        <Image
+          src="/Dataset.jpg"
+          alt="dataset"
+          className="object-cover w-full h-full"
+          width={420}
+          height={30}
+    
+        />
+    ),
   },
   {
     title: "Performance first",
@@ -128,44 +137,51 @@ const features = [
     demo: <WebVitals />,
   },
   {
-    title: "One-click Deploy",
+    title: "Filecoin Virtual Machine",
     description:
-      "Jumpstart your next project by deploying Precedent to [Vercel](https://vercel.com/) in one click.",
+      "The Filecoin Virtual Machine (FVM) is a runtime environment for smart contracts (also called actors) on the Filecoin network.",
     demo: (
-      <a href={DEPLOY_URL}>
+      <a href="https://fvm.filecoin.io/">
         <Image
-          src="https://vercel.com/button"
-          alt="Deploy with Vercel"
-          width={120}
+          src="/FilecoinLogo.png"
+          alt="filecoin"
+          //className="object-cover w-full h-full"
+          width={220}
           height={30}
-          unoptimized
+    
         />
       </a>
     ),
   },
   {
-    title: "Built-in Auth + Database",
+    title: "LightHouse Storage",
     description:
-      "Precedent comes with authentication and database via [Auth.js](https://authjs.dev/) + [Prisma](https://prisma.io/)",
+      "Data prep for deal making made easy. Upload files, generate CAR and get CAR links - all in one place",
     demo: (
       <div className="flex items-center justify-center space-x-20">
-        <Image alt="Auth.js logo" src="/authjs.webp" width={50} height={50} />
-        <Image alt="Prisma logo" src="/prisma.svg" width={50} height={50} />
+      <a href="https://data.lighthouse.storage/">
+        <Image alt="Lighthouse logo" 
+        src="/LighthouseLogo.jpeg"
+        className="object-cover w-full h-full"
+        width={220} 
+        height={30} 
+        />
+      </a>
       </div>
     ),
   },
   {
-    title: "Hooks, utilities, and more",
+    title: "IPFS, and more",
     description:
-      "Precedent offers a collection of hooks, utilities, and `@vercel/og`",
+      "The IPFS network is distributed and participatory, which reduces the problem of data silos that plague central servers.",
     demo: (
-      <div className="grid grid-flow-col grid-rows-3 gap-10 p-10">
-        <span className="font-mono font-semibold">useIntersectionObserver</span>
-        <span className="font-mono font-semibold">useLocalStorage</span>
-        <span className="font-mono font-semibold">useScroll</span>
-        <span className="font-mono font-semibold">nFormatter</span>
-        <span className="font-mono font-semibold">capitalize</span>
-        <span className="font-mono font-semibold">truncate</span>
+      <div className="flex items-center justify-center space-x-20">
+         <a href="https://ipfs.tech/">
+               <Image alt="IPFSLogo" 
+               src="/IPFSLogo.png" 
+               width={220} 
+               height={30} />
+            </a>   
       </div>
     ),
   },
