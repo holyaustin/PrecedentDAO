@@ -1,7 +1,7 @@
 import { ClassValue, clsx } from 'clsx'
 import { twMerge } from 'tailwind-merge'
 
-import { env } from '@/env.mjs'
+//import { env } from '@/env.mjs'
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -17,7 +17,7 @@ export function formatDate(input: string | number): string {
 }
 
 export function absoluteUrl(path: string) {
-  return `${env.SITE_URL || 'http://localhost:3000'}${path}`
+  return //`${env.SITE_URL || 'http://localhost:3000'}${path}`
 }
 
 export function trimFormattedBalance(balance: string | undefined, decimals = 4) {

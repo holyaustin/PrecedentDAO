@@ -5,6 +5,7 @@ import Head from 'next/head';
 import cx from "classnames";
 import { sfPro, inter } from "./fonts";
 import Nav from "@/components/layout/nav";
+import Navbar from "@/components/layout/navbar";
 import Footer from "@/components/layout/footer";
 import { Suspense } from "react";
 import '@rainbow-me/rainbowkit/styles.css';
@@ -91,7 +92,7 @@ export default async function RootLayout({
         <div className="fixed h-screen w-full bg-gradient-to-br from-indigo-50 via-white to-cyan-100" />
         <Suspense fallback="...">
          
-          <Nav />
+          <Navbar />
         </Suspense>
 
         <main className="flex min-h-screen w-full flex-col items-center justify-center py-32">
