@@ -82,16 +82,21 @@ stay connected on twitter @holyaustin
 
 LightHouse API - 1eceb394-fc75-43cf-83b6-546c9c13da57
 
-Huddle01 - eee33ed8308ea7f4814202f6fee8c936c80d2f9f03d480b069f13974fe349e21
+2023
 
-Nothing to compile
-deploying "DataGovernanceToken" (tx: 0xc77ab061aa745e360854c65b7cd16c81899a2aaf11e3e65a3610918c20ea52fc)...: deployed at 0x78F29A7b5A23952dC49E4e865d3B8FE9ACf8255B with 96331480 gas
+Ethereum address (this addresss should work for most tools): 0xa6D6f4556B022c0C7051d62E071c0ACecE5a1228
+f4address (also known as t4 address on testnets): f410fu3lpivllaiway4cr2yxaohakz3hfueri6eecg6i
+Done in 0.84s.
+
+Compiled 56 Solidity files successfully
+deploying "DataGovernanceToken" (tx: 0x6b83241f6f8f16227e54c7c6cf907708c991d0c88ad2ba14cc94db33934dc611)...: deployed at 0xD0c1966B12Dc488945A1917026a6d3Fef692fBDA with 89837605 gas
 Checkpoints 1
 Delegated to deployer wallet!
-deploying "TimeLock" (tx: 0x22336e9bc549323091de94bbcd2ec6ef5836eff16749c5c3a3b8a351c0356ad0)...: deployed at 0xDDFb19892A8D895Df8Fb9828A825dd8a3f67c22D with 86515714 gas
-deploying "GovernorContract" (tx: 0x92518bd0634afcc9bb85e6d9f7fb9a36835ab5e556992cd2adbd1d1d20352358)...: deployed at 0xe9C1a529AAC1f83282448d05314Cc2C86F4695f0 with 157560126 gas
+deploying "TimeLock" (tx: 0xf56134ee99b3d518a7a9b5eb426b74ea508351d4c909ffe5be5516da43615b20)...: deployed at 0xc4DB00B1B5A319103E5Fb4Ab10C6906796Ef9BFD with 88085944 gas
+deploying "GovernorContract" (tx: 0x1a9973b9a9a463ac6adb01e13af03d2dad4a90b24ba0ad479edbf1e8c01217db)...: deployed at 0x5696D1871a993FA353B51d13242b88E8Bc1D5Ecd with 134715138 gas
 Setting roles in TimeLock.sol
 Roles in TimeLock.sol set!
-deploying "DaoDealClient" (tx: 0x491e1c8d1d6cde85c87ed65cd8c547cb482d2ae92b33441bc15533b7bf6a56a6)...: deployed at 0x465ec9468303A06045De28C96B931ad336E70fe6 with 148273210 gas
+deploying "DaoDealClient" (tx: 0x129c9b824fba042973a4e8fad135dab2d21226f30ae10c4b9223ee3d63329a2a)...: deployed at 0x2bBb50e984cf50da7399eb32fE9e04af6eF8751e with 150420866 gas
 Transferring DaoDealClient Owner to TimeLock.sol
 Ownership transferred
+Done in 584.85s.

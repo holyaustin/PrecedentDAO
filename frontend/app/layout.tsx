@@ -27,12 +27,13 @@ import { publicProvider } from 'wagmi/providers/public';
 
 const { chains, publicClient, webSocketPublicClient } = configureChains(
   [
+    filecoinCalibration,
+    filecoin,
     mainnet,
+    goerli,
     polygon,
     optimism,
     arbitrum,
-    filecoin,
-    goerli,
     base,
     zora,
     ...(process.env.NEXT_PUBLIC_ENABLE_TESTNETS === 'true' ? [filecoinCalibration] : []),
