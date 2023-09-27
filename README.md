@@ -100,3 +100,14 @@ deploying "DaoDealClient" (tx: 0x129c9b824fba042973a4e8fad135dab2d21226f30ae10c4
 Transferring DaoDealClient Owner to TimeLock.sol
 Ownership transferred
 Done in 584.85s.
+
+
+Link to CAR file : carLink
+Piece CID : commP
+Piece Size: pieceSize
+Car Size: {carSize}
+Dataset Name: {datasetName}
+Data Type: {dataType}
+Category Type: {informationType}
+Description: {description}
+items in Dataset : {itemCount}

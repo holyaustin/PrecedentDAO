@@ -1,8 +1,10 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import { NFTStorage } from "nft.storage";
 import governorContract from "../../contracts/GovernorContract.json";
 import clientContract from "../../contracts/DaoDealClient.json";
 import "react-tooltip/dist/react-tooltip.css";
+import { Database } from "@tableland/sdk";
 import { Tooltip } from "react-tooltip";
 import { ethers } from "ethers";
 import { AiOutlineQuestionCircle } from "react-icons/ai";
@@ -10,8 +12,11 @@ import Spinner from 'react-bootstrap/Spinner';
 import CID from "cids";
 import { checkWalletIsConnected } from "@/app/scripts/wallet";
 import { governorContractAddress, daoDealClientAddress } from "@/app/scripts/contractaddress";
+import PrecedenceNFT from "@/app/scripts/PrecedenceNFT.json";
 // import { createProposal } from "@/app/scripts/polybase";
 import { Buffer } from 'buffer';
+const PrecedentDAOAddress = "0x20bc104513a90B342639572F24045F5EfCF5A9be";
+const APIKEY = [process.env.NEXT_PUBLIC_NFT_STORAGE_API_KEY];
 
 const governorContractABI = governorContract.abi;
 const clientContractAddress = daoDealClientAddress;
@@ -35,18 +40,34 @@ export default function Create() {
   const [txSubmitted, setTxSubmitted] = useState(false);
   const [dealID, setDealID] = useState("");
   const [proposingDeal, setProposingDeal] = useState(false);
-  const [language, setLanguage] = useState("");
+  const [datasetName, setDatasetName] = useState("");
   const [dataType, setDataType] = useState("");
   const [informationType, setInformationType] = useState("");
-  const [languageFamily, setLanguageFamily] = useState("");
+  const [itemCount, setItemCount] = useState("");
   const [description, setDescription] = useState("");
 
+  const [errorMessage, setErrorMessage] = useState(null);
+  const [uploadedFile, setUploadedFile] = useState();
+  const [uploadedFile2, setUploadedFile2] = useState();
+  const [imageView, setImageView] = useState();
+  const [metaDataURL, setMetaDataURL] = useState();
+  const [txURL, setTxURL] = useState();
+  const [txStatus, setTxStatus] = useState();
+  //const [formInput, updateFormInput] = useState({ name: "",  total: "",  category: "sport",  description: "" });
 
+  const handleFileUpload = (event) => {
+    console.log("Sample for upload selected...");
+    setUploadedFile(event.target.files[0]);
+    setTxStatus("");
+    setImageView("");
+    setMetaDataURL("");
+    setTxURL("");
+  };
 
   //const [network, setNetwork] = useState("");
 
-  const handleChangeLanguage = (event) => {
-    setLanguage(event.target.value);
+  const handleChangeDatasetName = (event) => {
+    setDatasetName(event.target.value);
   };
 
   const handleChangeDataType = (event) => {
@@ -57,8 +78,8 @@ export default function Create() {
     setInformationType(event.target.value);
   };
 
-  const handleChangeLanguageFamily = (event) => {
-    setLanguageFamily(event.target.value);
+  const handleChangeItemCount = (event) => {
+    setItemCount(event.target.value);
   };
 
   const handleChangeDescription = (event) => {
@@ -86,14 +107,97 @@ export default function Create() {
     setProposingDeal(true);
  }
 
-  const handleSubmit = async (event) => {
+ const uploadDataSet = async (uploadedFile) => {
+  console.log("upload dataset pics");
+  //const { name, total, category, description } = formInput;
+  console.log("form input");
+  console.log("Link to CAR file", carLink);
+  console.log("Piece CID", pieceSize);
+  console.log("Car Size", carSize);
+  console.log("DataSet name", datasetName);
+  console.log("total", itemCount);
+  console.log("image:", uploadedFile);
+  console.log("category", informationType);
+  console.log("description", description);
+  console.log("NFT.storage API", APIKEY);
+
+  //if (!name || !description || !inputFile) return;
+  console.log("Picture check"); 
+  const nftStorage = new NFTStorage({ token: APIKEY, });
+   console.log("NFT.storage");
+  try {
+    console.log("Trying to upload file to ipfs");
+    setTxStatus("Uploading Video to IPFS via NFT.Storage");
+    console.log("close to metadata");
+    const metaData = await nftStorage.store({
+      name: datasetName,
+      description: description,
+      image: uploadedFile,
+      properties: {
+        Link_to_CAR_file : carLink,
+        Piece_CID : commP,
+        Piece_Size : pieceSize,
+        Car_Size : carSize,
+        Data_Type : dataType,
+        Category_Type : informationType,
+        items_in_Dataset : itemCount,
+      },
+    });
+    console.log("metadata is: ", { metaData });
+    setMetaDataURL(metaData.url);
+    console.log("metadata URL is: ", metaData.url );
+
+
+    // add metadata to blockchain
+    const { ethereum } = window;
+      
+      if (ethereum) {
+        const provider = new ethers.BrowserProvider(ethereum);
+        const signer = await provider.getSigner();
+
+
+        const connectedContract = new ethers.Contract(PrecedentDAOAddress, PrecedenceNFT.abi, signer);
+        console.log("Connected to contract", PrecedentDAOAddress);
+        console.log("IPFS blockchain uri is ", metaData.url);
+        
+        const PrecedenceTx = await connectedContract.createToken(metaData.url);
+        console.log("File successfully created and added to Blockchain");
+        await PrecedenceTx.wait();
+
+        /**
+     const proposeReceipt = await proposeTx.wait()
+        console.log(proposeReceipt)
+
+        const proposalId = proposeReceipt.logs[0].args.proposalId
+        console.log(`Proposed with proposal ID:\n  ${proposalId}`)
+        const proposalState = await governor.state(proposalId)
+        console.log(`Current Proposal State: ${proposalState}`)
+        setProposingDeal(false);
+        setTxSubmitted(true)
+     */
+
+      } else {
+        console.log("Ethereum object doesn't exist!");
+      }
+
+    return metaData;
+    
+  } catch (error) {
+    setErrorMessage("Could store file to NFT.Storage - Aborted file upload.");
+    console.log("Error Uploading Content", error);
+  }
+};
+
+  const handleSubmit = async (event, uploadedFile) => {
+    console.log("Inside DAO client contract");
     event.preventDefault();
     // do something with the carLink value, like send it to a backend API
+    await uploadDataSet(uploadedFile);
+
     await changeProposing();
+
     try {
-      setErrorMessageSubmit(
-        ""
-      );
+      setErrorMessageSubmit("" );
       cid = new CID(commP);
 
       const { ethereum } = window;
@@ -102,7 +206,7 @@ export default function Create() {
 
         const provider = new ethers.BrowserProvider(ethereum);
         const signer = await provider.getSigner();
-
+        console.log("passed the dao signer");
         daoDealClient = new ethers.Contract(
           clientContractAddress,
           clientContractABI,
@@ -140,38 +244,27 @@ export default function Create() {
           extraParamsV1,
         ];
         
-        console.log("here")
+        console.log("Before Dao Client")
         const encodedFunctionCall = daoDealClient.interface.encodeFunctionData("makeDealProposal", [DealRequestStruct]);
-        console.log("here")
-        console.log(`Proposing on ${clientContractAddress} with ${[DealRequestStruct]} `);
 
+        console.log(`Proposing on ${clientContractAddress} with ${[DealRequestStruct]} `);
+ 
         const proposeTx = await governor.propose(
           [clientContractAddress],
           [0],
           [encodedFunctionCall],
           "Let's put this file in Filecoin!"
         )
-
         const proposeReceipt = await proposeTx.wait()
         console.log(proposeReceipt)
 
         const proposalId = proposeReceipt.logs[0].args.proposalId
         console.log(`Proposed with proposal ID:\n  ${proposalId}`)
         const proposalState = await governor.state(proposalId)
-
-        //TODO save the proposalId to Polybase?
-          //storeProposalId(proposalId);
-          //await createProposal(languageFamily, description, signer.address, proposalId, language, dataType, informationType, DealRequestStruct);
-
-        //End of TODO
-
-
-
-        // the Proposal State is an enum data type, defined in the IGovernor contract.
-        // 0:Pending, 1:Active, 2:Canceled, 3:Defeated, 4:Succeeded, 5:Queued, 6:Expired, 7:Executed
         console.log(`Current Proposal State: ${proposalState}`)
         setProposingDeal(false);
         setTxSubmitted(true)
+       
 
       } else {
         console.log("Ethereum object doesn't exist!");
@@ -248,8 +341,8 @@ export default function Create() {
             </div>
           </div>
         </div>
-
-        <form className="my-16 child-1 bg-white p-8 rounded shadow-lg w-10/12" onSubmit={handleSubmit}>
+        // `app/dashboard/page.tsx` is the UI for the `/dashboard` URL
+        <form className="my-16 child-1 bg-white p-8 rounded shadow-lg w-10/12" onSubmit={(event) => handleSubmit(event, uploadedFile)}>
   
         <div className="child-1-hg mb-4">
         <label className="mb-1">Link to CAR file</label>
@@ -297,28 +390,41 @@ export default function Create() {
 
   <input className="input-elem bg-gray-100 rounded w-full mb-4 p-2" type="text" value={carSize} onChange={handleChangeCarSize} />
 
+
+
  <div> <label className="mb-1">Dataset Name</label></div>
-  <input className="input-elem bg-gray-100 rounded w-full mb-4 p-2" type="text" value={language} onChange={handleChangeLanguage} />
+  <input className="input-elem bg-gray-100 rounded w-full mb-4 p-2" type="text" value={datasetName} onChange={handleChangeDatasetName} />
+
+
   <div> <label className="mb-1">Data Type. (Eg. Video, Rar, Zip, PDF, Audio, JSON, Image, etc.)</label></div>
   <input className="input-elem bg-gray-100 rounded w-full mb-4 p-2" type="text" value={dataType} onChange={handleChangeDataType} />
+
+
   <div> <label className="mb-1">Category Type. (Eg. Science, Sports, Engineeering, Animation, Medicine etc.)</label></div>
   <input className="input-elem bg-gray-100 rounded w-full mb-4 p-2" type="text" value={informationType} onChange={handleChangeInformationType} />
+
 
   <div> <label className="mb-1">Description of the content</label></div>
   <input className="input-elem bg-gray-100 rounded w-full mb-4 p-2" type="text" value={description} onChange={handleChangeDescription} />
 
+
   <div> <label className="mb-1">Number of individual items in Dataset. (Eg. 200 videos, 450 json files etc) </label></div>
-  <input className="input-elem bg-gray-100 rounded w-full mb-4 p-2" type="text" value={languageFamily} onChange={handleChangeLanguageFamily} />
+  <input className="input-elem bg-gray-100 rounded w-full mb-4 p-2" type="text" value={itemCount} onChange={handleChangeItemCount} />
   
+
+              <h3>Upload your sample picture</h3>
+              <input type="file" onChange={handleFileUpload} className="text-black mt-2 border rounded  text-xl" />
+
+      
 
 
 
   <button
     type="submit"
-    className="block bg-[#1d9bf0] text-white text-center rounded px-4 py-2 w-full mb-4 hover:bg-teal-600 transition-colors"
+    className="block bg-[#1d9bf0] text-white text-center rounded px-4 py-2 w-full p-10 mb-4 hover:bg-black transition-colors"
     disabled={proposingDeal}
   >
-    {proposingDeal ? "Proposing..." : (txSubmitted ? "You're all set!" : "Propose!")}
+    {proposingDeal ? "Proposing..." : (txSubmitted ? "Proposal successfully submitted" : "Create Proposal")}
   </button>
 
 
@@ -328,7 +434,7 @@ export default function Create() {
       <span className="visually-hidden">Loading...</span>
     </Spinner>
   )}
-  <div className="text-green-500 mb-2">{txSubmitted}</div>
+  <div className="text-[#1d9bf0]  mb-2">{txSubmitted}</div>
 </form>
 
    </div>
