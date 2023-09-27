@@ -341,7 +341,7 @@ export default function Create() {
             </div>
           </div>
         </div>
-        // `app/dashboard/page.tsx` is the UI for the `/dashboard` URL
+
         <form className="my-16 child-1 bg-white p-8 rounded shadow-lg w-10/12" onSubmit={(event) => handleSubmit(event, uploadedFile)}>
   
         <div className="child-1-hg mb-4">

@@ -5,7 +5,7 @@ import { vote } from "@/app/scripts/contractaddress";
 import { ethers } from "ethers";
 //import Chat from "./Chat.jsx";
 //import governorContract from "@/app/scripts/contractaddress";
-i//mport dataGovernanceToken from "@/app/scripts/contractaddress";
+//mport dataGovernanceToken from "@/app/scripts/contractaddress";
 
 import governorContract from "../../contracts/GovernorContract.json";
 import dataGovernanceToken from "../../contracts/DataGovernanceToken.json";
