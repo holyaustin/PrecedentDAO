@@ -2,8 +2,6 @@
 
 A Dataset Marketplace build on FVM controlled by a DataDAO
 
-![Amarum](https://bafkreihqvhqlk4j5ea4hky3fmk24cj6xhw2rhgbkfcbg6fktlkprbec7gm.ipfs.nftstorage.link/)
-
 ## Introduction
 
 Most Datasets especially video datasets are available on centralized storage. This means that these storage can disappear one day and cannot be available for users in the nearest future. Amarum is a Data DAO video project with the aim of helping creators publish exciting video datasets while getting rewarded for that. The datasets upon submission is curated and stored on filecoin SPs through data deals that are established by the DAO. The DAO has the responsibility of storing these datasets and making money from the marketplace paywall. The accrued income is distributed both to DAO members and some kept in the DAO treasury. DAO members can use the Huddle01 video streaming feature to have meetings and record presentation and mint them while storing the Video files on IPFS and Metadata on Filecoin Blockchain.
@@ -13,8 +11,8 @@ Contents can also be streamed live through Huddle01 Live Presentation SDK stream
 
 Frontend: NextJS, postcss, tailwindcss, Theme
 
-Web3 technologies: LightHouse, Huddle01,  IPFS/filecoin, Livepeer (livepeer.js), Web3Modal,  Filecoin (Hyperspace), TableLand, Push Protocol
-Backend: Solidity, Node.js
+Web3 technologies: LightHouse, Huddle01,  IPFS/filecoin, Tableland, Rainbowkit wallet,  Filecoin (Hyperspace), TableLand, NFT.Storage
+Backend: Solidity, Node.js, Ethers.js, hardhat
 
 Blockchain deployed to:  Filecoin (Calibration) Testnet
 
@@ -26,20 +24,20 @@ The smart contract uses ERC-721 specification to hold metadata URI, ethers.js wa
 
 ## Live DApp hosted on
 
-Live Dapp on Vercel: - <https://amarum.vercel.app/>
+Live Dapp on Vercel: - <https://precedentdao.vercel.app/>
 
-  Filecoin (calibration) Testnet deployed Address = "0x4e75D8F85ED40aA3f73fB751b1Dfa07DEFe09C94"
+  Filecoin (calibration) Testnet deployed Address = " 0xD0c1966B12Dc488945A1917026a6d3Fef692fBDA"
 
-  <https://calibration.filfox.info/en/address/0x4e75D8F85ED40aA3f73fB751b1Dfa07DEFe09C94>
+  <https://calibration.filfox.info/en/address/ 0xD0c1966B12Dc488945A1917026a6d3Fef692fBDA>
 
- Youtube video link: <https://youtu.be/kZvxCGMPci8>
+ Youtube video link: <https://youtu.be/UKGHUkZtesk>
 
 ## Getting Started
 
 First, run the development server:
 
 ```text
-clone the repo https://github.com/holyaustin/Mominter.git
+clone the repo 
 # next is to 
 npm install
 # then
@@ -56,8 +54,7 @@ Try running some of the following tasks:
 
 Fork this repo using
 
-git clone <https://github.com/holyaustin/Mominter.git>
-
+git clone 
 cd soldier-ant-colony
 
 npx hardhat node
@@ -75,8 +72,6 @@ npx hardhat run scripts/deploy.js --network testnet
 E-mail - <holyaustin@yahoo.com>
 
 stay connected on twitter @holyaustin
-
-<https://live-par-1-abr-cdn.livepush.io/live_abr_cdn/emaIqCGoZw-6/index.m3u8>
 
 <https://calibration.filfox.info/en/address/0xa6d6f4556b022c0c7051d62e071c0acece5a1228>
 
@@ -111,3 +106,5 @@ Data Type: {dataType}
 Category Type: {informationType}
 Description: {description}
 items in Dataset : {itemCount}
+
+https://youtu.be/UKGHUkZtesk

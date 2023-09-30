@@ -64,10 +64,10 @@ export default async function Home() {
 
 
 
-          <a
+          <Link
             className="flex max-w-fit items-center justify-center space-x-2 rounded-full border border-gray-300 bg-white px-5 py-2 text-md text-gray-600 shadow-md transition-colors hover:border-gray-800 font-bold"
-            href=""
-            target="_blank"
+            href="/explore"
+            // target="_blank"
             rel="noopener noreferrer"
           >
                         <svg
@@ -90,8 +90,67 @@ export default async function Home() {
 
             </p>
            
-          </a>
+          </Link>
+
+          <Link
+            className="group flex max-w-fit items-center justify-center space-x-2 rounded-full border border-black bg-black px-5 py-2 text-md font-bold text-white transition-colors hover:bg-white hover:text-black"
+            href="/profile"
+            // target="_blank"
+            rel="noopener noreferrer"
+          >
+            <svg
+              className="h-4 w-4 group-hover:text-black"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M12 4L20 20H4L12 4Z"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          
+            <p>Create Profile </p>
+          </Link>
+
+          
+
+
+
+
+          <Link
+            className="flex max-w-fit items-center justify-center space-x-2 rounded-full border border-gray-300 bg-white px-5 py-2 text-md text-gray-600 shadow-md transition-colors hover:border-gray-800 font-bold"
+            href="/admin"
+            // target="_blank"
+            rel="noopener noreferrer"
+          >
+                        <svg
+              className="h-4 w-4 group-hover:text-black"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M12 4L20 20H4L12 4Z"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+        
+            <p>
+              <span className="hidden sm:inline-block">Admin{" "}</span> 
+
+            </p>
+           
+          </Link>
         </div>
+
+
       </div>
       <div className="my-10 grid w-full max-w-screen-xl animate-fade-up grid-cols-1 gap-5 px-5 md:grid-cols-3 xl:px-0">
         {features.map(({ title, description, demo, large }) => (

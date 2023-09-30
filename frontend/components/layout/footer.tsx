@@ -4,7 +4,7 @@ export default function Footer() {
   return (
     <div className="absolute w-full border-t border-gray-200 bg-black py-5 text-center">
         <a
-          href="https://twitter.com/holyaustin/status/1613928948915920896"
+          href="https://twitter.com/holyaustin/status/1707752460897456506"
           target="_blank"
           rel="noreferrer"
           className="mx-auto mb-5 flex max-w-fit animate-fade-up items-center justify-center space-x-2 overflow-hidden rounded-full bg-blue-100 px-7 py-2 transition-colors hover:bg-blue-200"

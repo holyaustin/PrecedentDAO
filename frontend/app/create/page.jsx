@@ -48,12 +48,6 @@ export default function Create() {
 
   const [errorMessage, setErrorMessage] = useState(null);
   const [uploadedFile, setUploadedFile] = useState();
-  const [uploadedFile2, setUploadedFile2] = useState();
-  const [imageView, setImageView] = useState();
-  const [metaDataURL, setMetaDataURL] = useState();
-  const [txURL, setTxURL] = useState();
-  const [txStatus, setTxStatus] = useState();
-  //const [formInput, updateFormInput] = useState({ name: "",  total: "",  category: "sport",  description: "" });
 
   const handleFileUpload = (event) => {
     console.log("Sample for upload selected...");
@@ -63,8 +57,6 @@ export default function Create() {
     setMetaDataURL("");
     setTxURL("");
   };
-
-  //const [network, setNetwork] = useState("");
 
   const handleChangeDatasetName = (event) => {
     setDatasetName(event.target.value);

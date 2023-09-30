@@ -32,6 +32,7 @@ export default function NavBar() {
             ></Image>
             <p>Precedent DAO</p>
           </Link>
+          {/**
           <div>
             { (
               <button
@@ -43,6 +44,7 @@ export default function NavBar() {
             )}
                      
           </div>
+ */}
           <div> <ConnectButton /></div>
         </div>
       </div>
